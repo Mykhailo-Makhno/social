@@ -29,6 +29,10 @@ function MyPosts(props: PropsType) {
 
 
 
+
+
+
+
         if(newPostElement.current) {
             let text=newPostElement.current.value
             props.dispatch( uppgradeNewPostTextActionCreator(text));
