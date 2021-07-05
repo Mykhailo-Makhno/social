@@ -1,0 +1,9 @@
+.item a {
+    font-size: 24px;
+    font-family: "American Typewriter";
+    color: white;
+    text-decoration: none;
+}
+.item a.activeLink{
+    color: red;
+}
