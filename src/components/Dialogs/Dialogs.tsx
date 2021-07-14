@@ -6,8 +6,8 @@ import Message from "./Message/Message";
 import {
     MessagesPageType,
      ActionsTypes, StoreType
-} from "../../store/state";
-import {updateNewMessageBody,sendMessageCreator} from '../../store/message-reducer'
+} from "../../redux/store";
+import {updateNewMessageBody,sendMessageCreator} from '../../redux/message-reducer'
 
 type PropsType = {
     store: StoreType

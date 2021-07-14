@@ -1,10 +1,28 @@
 import {v1} from "uuid";
-import {ActionsTypes, MessagesPageType} from "./state";
+import {ActionsTypes, MessagesPageType} from "./store";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
-const messageReducer =(state:MessagesPageType,action:ActionsTypes)=> {
+let initialState = {
+    messages: [
+        {id: v1(), message: 'hi'},
+        {id: v1(), message: 'how are you'},
+        {id: v1(), message: 'im good'},
+        {id: v1(), message: 'and you'},
+        {id: v1(), message: 'im fine'}
+    ],
+    dialogs: [
+        {id: v1(), name: 'Mike'},
+        {id: v1(), name: 'Helen'},
+        {id: v1(), name: 'Nike'},
+        {id: v1(), name: 'Jon'},
+        {id: v1(), name: 'Sveta'}
+    ],
+    newMessageBody: ''
+}
+
+const messageReducer = (state: MessagesPageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
             state.newMessageBody = action.body

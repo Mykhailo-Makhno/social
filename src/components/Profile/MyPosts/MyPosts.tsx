@@ -1,8 +1,8 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import Posts from "./Posts/Posts";
-import {ActionsTypes,  PostsType, } from "../../../store/state";
-import {addPostActionCreator,uppgradeNewPostTextActionCreator} from '../../../store/profile-reducer'
+import {ActionsTypes,  PostsType, } from "../../../redux/store";
+import {addPostActionCreator,uppgradeNewPostTextActionCreator} from '../../../redux/profile-reducer'
 
 type PropsType = {
     newPostText:string
@@ -26,13 +26,6 @@ function MyPosts(props: PropsType) {
 
     let onPostChange=()=>{
 
-
-
-
-
-
-
-
         if(newPostElement.current) {
             let text=newPostElement.current.value
             props.dispatch( uppgradeNewPostTextActionCreator(text));
@@ -43,7 +36,7 @@ function MyPosts(props: PropsType) {
 
         <div>
             <div className={s.posts}>
-
+f
                 <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText}/>
                 <button onClick={addPost}>add post</button>
                 {postsItem}
