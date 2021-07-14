@@ -29,7 +29,8 @@ function App(props: PropsType) {
                     store={props.store}
 
                 />}/>
-                <Route exact path={'/Profile'} render={() => <Profile postPage={state.profilePage.posts}
+                <Route exact path={'/Profile'} render={() => <Profile
+                    postPage={state.profilePage.posts}
                                                                       newPostText={state.profilePage.messageForNewPos}
                                                                       dispatch={props.dispatch}
 
