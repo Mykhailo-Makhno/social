@@ -20,7 +20,7 @@ export type ActionsTypes = ReturnType<typeof uppgradeNewPostTextActionCreator> |
     ReturnType<typeof updateNewMessageBody> |
     ReturnType<typeof sendMessageCreator>
 
-export let store: StoreType = {
+ let store: StoreType = {
     _state: {
         profilePage: {
             messageForNewPos: '',

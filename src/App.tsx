@@ -6,16 +6,23 @@ import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import Dialogs from "./components/Dialogs/Dialogs";
 import store, {ActionsTypes, RootStateType, StoreType} from "./redux/store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {ProviderType} from "./StoreContext";
 
 
-type PropsType = {
-    store: StoreType
-    dispatch: (action: ActionsTypes) => void
+// type PropsType = {
+//     store: StoreType
+//
+// }
 
-}
+//  type ProviderType={
+//     store:StoreType
+//     children:React.ReactNode
+// }
 
-function App(props: PropsType) {
-    const state = props.store.getState()
+function App() {
+
+    // const state = props.store.getState()
     return (
 
         <div className='app-wrapper'>
@@ -23,18 +30,13 @@ function App(props: PropsType) {
             <Navbar/>
 
             <div className='app-wrapper-content'>
-                <Route exact path={'/dialogs'} render={() => <Dialogs
-                    messagesPage={props.store._state.messagesPage}
-                    dispatch={props.dispatch}
-                    store={props.store}
+                <Route exact path={'/dialogs'} render={() => <DialogsContainer/>}/>
+                    {/*// store={props.store}*/}
 
-                />}/>
-                <Route exact path={'/Profile'} render={() => <Profile
-                    postPage={state.profilePage.posts}
-                                                                      newPostText={state.profilePage.messageForNewPos}
-                                                                      dispatch={props.dispatch}
+                <Route exact path={'/Profile'} render={() => <Profile/>}/>
+                    {/*// store={props.store}*/}
 
-                />}/>
+
 
             </div>
         </div>

@@ -4,11 +4,11 @@ import messageReducer from "./message-reducer";
 import {StoreType} from "./store";
 
 let reducers = combineReducers({
-    profileReducer:profileReducer,
-    messageReducer:messageReducer
+    profilePage:profileReducer,
+    messagesPage:messageReducer
 })
- export type ReduxStoreType={
+// type ReduxStoreType= ReturnType<typeof reducers>
 
-}
+
 let store:StoreType = createStore(reducers)
 export default store
