@@ -5,16 +5,13 @@ import DialogItem from "./DalogItem/DialogItem";
 import Message from "./Message/Message";
 import {
     MessagesPageType,
-    ActionsTypes, StoreType
 } from "../../redux/store";
 import {updateNewMessageBody, sendMessageCreator} from '../../redux/message-reducer'
 
 type PropsType = {
-    store: StoreType
     updateNewMessageBody: (body: string) => void
-    sendMessage:()=>void
+    sendMessage:() => void
     messagesPage:MessagesPageType
-
 }
 
 function Dialogs(props: PropsType) {

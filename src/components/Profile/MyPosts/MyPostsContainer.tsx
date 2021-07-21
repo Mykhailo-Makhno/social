@@ -1,44 +1,33 @@
 import React from "react";
-import s from './MyPosts.module.css'
-import Posts from "./Posts/Posts";
-import {ActionsTypes, PostsType, StoreType,} from "../../../redux/store";
 import {addPostActionCreator, uppgradeNewPostTextActionCreator} from '../../../redux/profile-reducer'
 import MyPosts from "./MyPosts";
-import StoreContext from "../../../StoreContext";
-
-// type PropsType = {
-//     store: StoreType
-//     // newPostText: string
-//     // posts: Array<PostsType>
-//     // dispatch: (action: ActionsTypes) => void
-//
-// }
+import {connect} from "react-redux";
+import {AppDispatchType, AppStateType} from "../../../redux/redux-store";
 
 
-function MyPostsContainer() {
 
 
-    return (
-        <StoreContext.Consumer>{
-            (store) => {
-                let state = store.getState()
-                let addPost = () => {
-                    store.dispatch(addPostActionCreator(state.profilePage.messageForNewPos));
-                }
 
+let mapDispatchToProps = (dispatch: AppDispatchType) => {
+    return {
+        updateNewPostText: (text:string) => {
+            let action = uppgradeNewPostTextActionCreator(text)
+            dispatch(action);
 
-                let onPostChange = (text: string) => {
-                    store.dispatch(uppgradeNewPostTextActionCreator(text));
-                }
-                return <MyPosts
-                    updateNewPostText={onPostChange} addPost={addPost}
-                    posts={state.profilePage.posts}
-                    newPostText={state.profilePage.messageForNewPos}
-                />
-            }
+        },
+        addPost: () => {
+            dispatch(addPostActionCreator());
         }
-        </StoreContext.Consumer>
-    )
+    }
 }
+let mapStateToProps = (state: AppStateType) => {
+    return {
+        newPostText: state.profilePage.messageForNewPos,
+        posts: state.profilePage.posts
+    }
+
+}
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer

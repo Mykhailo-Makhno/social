@@ -1,8 +1,18 @@
 import {v1} from "uuid";
-import {ActionsTypes, MessagesPageType} from "./store";
+import {ActionsTypes} from "./store";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
+
+
+export type DialogType = {
+    name: string
+    id: number | string
+}
+export type MessageType = {
+    message: string
+    id: string
+}
 
 let initialState = {
     messages: [
@@ -22,16 +32,25 @@ let initialState = {
     newMessageBody: ''
 }
 
-const messageReducer = (state: MessagesPageType = initialState, action: ActionsTypes) => {
+export type InitialSateteType= typeof initialState
+
+
+const messageReducer = (state:InitialSateteType  = initialState, action: ActionsTypes):InitialSateteType => {
+    console.log(action)
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body
-            break;
+            return {
+                ...state,
+                newMessageBody: action.body
+            }
         case SEND_MESSAGE:
-            let body = state.newMessageBody
-            state.newMessageBody = ''
-            state.messages.push({id: v1(), message: body})
-            break;
+            let newMessages = [...state.messages];
+            newMessages.push({id: v1(), message: state.newMessageBody})
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: newMessages
+            }
     }
     return state;
 }
@@ -41,10 +60,9 @@ export const updateNewMessageBody = (message: string) => {
         body: message
     } as const
 }
-export const sendMessageCreator = (message: string) => {
+export const sendMessageCreator = () => {
     return {
-        type: SEND_MESSAGE,
-        newMessage: message
+        type: SEND_MESSAGE
     } as const
 }
 
