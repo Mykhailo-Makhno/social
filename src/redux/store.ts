@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import profileReducer, {addPostActionCreator, uppgradeNewPostTextActionCreator} from "./profile-reducer";
 import messageReducer, {sendMessageCreator, updateNewMessageBody} from "./message-reducer";
+import {followAC, setUsersAC, unfollowAC} from "./users-reducer";
 
 
 
@@ -18,8 +19,10 @@ import messageReducer, {sendMessageCreator, updateNewMessageBody} from "./messag
 export type ActionsTypes = ReturnType<typeof uppgradeNewPostTextActionCreator> |
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewMessageBody> |
-    ReturnType<typeof sendMessageCreator>
-//
+    ReturnType<typeof sendMessageCreator>|
+    ReturnType<typeof followAC>|
+    ReturnType<typeof unfollowAC>|
+    ReturnType<typeof setUsersAC>
 //  let store: StoreType = {
 //     _state: {
 //         profilePage: {

@@ -5,6 +5,8 @@ import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Users from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 
@@ -29,10 +31,9 @@ function App() {
 
             <div className='app-wrapper-content'>
                 <Route exact path={'/dialogs'} render={() => <DialogsContainer/>}/>
-                    {/*// store={props.store}*/}
 
                 <Route exact path={'/Profile'} render={() => <Profile/>}/>
-                    {/*// store={props.store}*/}
+                <Route exact path={'/Users'} render={() => <UsersContainer/>}/>
 
 
 

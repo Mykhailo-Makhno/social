@@ -14,22 +14,36 @@ let initialState = {
     ]
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
+export type InitialStateType= typeof initialState
+
+
+const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes):InitialStateType => {
+
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             const newPost: PostsType = {
                 id: v1(),
                 message: state.messageForNewPos,
                 likeCount: 0
+            };
+            return {
+                ...state,
+                posts: [...state.posts,newPost],
+                messageForNewPos : ''
             }
-            state.posts.push(newPost)
-            state.messageForNewPos = ''
-            break;
-        case UPPGRADE_NEW_POST_TEXT:
-            state.messageForNewPos = action.newText
-            break;
+
+        }
+        case UPPGRADE_NEW_POST_TEXT: {
+
+            return {
+                ...state,
+                messageForNewPos : action.newText
+            }
+
+        }
+            default:
+            return state;
     }
-    return state;
 }
 export const addPostActionCreator = () => {
     return {

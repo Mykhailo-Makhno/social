@@ -18,7 +18,7 @@ function Dialogs(props: PropsType) {
     let state = props.messagesPage
 
     let dialogsElement =
-        state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+        state.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>)
     let messagesElement =
         state.messages.map(m => <DialogItem key={m.id} message={m.message}/>)
     let newMessageBody = state.newMessageBody

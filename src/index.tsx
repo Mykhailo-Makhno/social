@@ -6,7 +6,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
 import store from "./redux/redux-store";
 
- const renderEntireTree = () => {
+
     ReactDOM.render(
         <BrowserRouter>
 
@@ -17,8 +17,4 @@ import store from "./redux/redux-store";
         </BrowserRouter>,
         document.getElementById('root'))
     ;
-}
-renderEntireTree()
-store.subscribe(renderEntireTree)
-
 

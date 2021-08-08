@@ -32,38 +32,42 @@ let initialState = {
     newMessageBody: ''
 }
 
-export type InitialSateteType= typeof initialState
+export type InitialStateType = typeof initialState
 
 
-const messageReducer = (state:InitialSateteType  = initialState, action: ActionsTypes):InitialSateteType => {
-    console.log(action)
+const messageReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+
+
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            return {
+           return  {
                 ...state,
                 newMessageBody: action.body
-            }
+            };
+
+
         case SEND_MESSAGE:
-            let newMessages = [...state.messages];
-            newMessages.push({id: v1(), message: state.newMessageBody})
-            return {
+            return  {
                 ...state,
                 newMessageBody: '',
-                messages: newMessages
-            }
-    }
-    return state;
-}
-export const updateNewMessageBody = (message: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: message
-    } as const
-}
-export const sendMessageCreator = () => {
-    return {
-        type: SEND_MESSAGE
-    } as const
-}
+                messages: [...state.messages, {id: v1(), message: state.newMessageBody}]
+            };
 
-export default messageReducer
+
+        default:
+            return state;
+    }
+    }
+    export const updateNewMessageBody = (message: string) => {
+        return {
+            type: UPDATE_NEW_MESSAGE_BODY,
+            body: message
+        } as const
+    }
+    export const sendMessageCreator = () => {
+        return {
+            type: SEND_MESSAGE
+        } as const
+    }
+
+    export default messageReducer
