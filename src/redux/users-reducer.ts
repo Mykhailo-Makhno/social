@@ -13,31 +13,29 @@ export type UserType={
     status:string
     location:LocationType
 }
- type LocationType={
+ export type LocationType={
     city:string
     country:string
 }
 
-export type InitialStateType={
-    users:Array<UserType>
-}
 const initialState:InitialStateType = {
-users:[]
-
+    users:[]
 }
 
-// export type InitialStateType = typeof initialState
+export type InitialStateType={
+    users: Array<UserType>
+}
 
 
-const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+ const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
 
     switch (action.type) {
         case FOLLOW:
-            return <InitialStateType>{
+            return {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return (...u, followed: true)
+                        return {...u, followed: true}
                     }
                     return u
                 })
@@ -46,18 +44,21 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
 
 
         case UNFOLLOW:
-            return <InitialStateType>{
+            return {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return (...u, followed: false)
+                        return {...u, followed: false}
                     }
                     return u
                 })
             }
 
         case SET_USERS:{
-            return  {...state,users:[...state.users, action.users]}
+            return  {...state,
+                users: [ ...state.users].concat(action.users)
+                //users: state.users.map((user) => user).concat(action.users)
+            }
         }
 
         default:
@@ -76,7 +77,7 @@ export const unfollowAC = (userId:string) => {
         userId
     } as const
 }
-export const setUsersAC = (users:UserType) => {
+export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: SET_USERS,
         users

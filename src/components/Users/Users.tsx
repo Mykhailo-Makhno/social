@@ -49,8 +49,8 @@ if (props.usersPage.users.length===0) {
                         <img src={u.photoUrl}/>
                     </div>
                     <div>
-                        {u.followed?<button onClick={()=>{props.follow(u.id)}}>Unfollow</button>:
-                            <button onClick={()=>{props.unfollow(u.id)}}>Follow</button>}
+                        {u.followed?<button onClick={()=>{props.unfollow(u.id)}}>Unfollow</button>:
+                            <button onClick={()=>{props.follow(u.id)}}>Follow</button>}
 
                     </div>
                 </span>
