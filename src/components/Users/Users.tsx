@@ -2,51 +2,25 @@ import React from 'react';
 import {v1} from "uuid";
 import {UserType} from "../../redux/users-reducer";
 import {UsersPropsType} from "./UsersContainer";
+import axios from "axios";
+import userPhoto from '../../assets/images/user.png'
 
 const Users = (props: UsersPropsType) => {
+    let getUsers=()=>{
 if (props.usersPage.users.length===0) {
-    props.setUsers([
-            {
-                id: v1(),
-                photoUrl: 'http://www.clker.com/cliparts/3/d/3/7/12065718151966625209johnny_automatic_NPS_map_pictographs_part_96.svg.hi.png',
-                followed: true,
-                fullName: 'Mike',
-                status: 'Junior',
-                location: {city: 'Kiev', country: 'Ukraine'}
-            },
-            {
-                id: v1(),
-                photoUrl: 'http://www.clker.com/cliparts/3/d/3/7/12065718151966625209johnny_automatic_NPS_map_pictographs_part_96.svg.hi.png',
-                followed: false,
-                fullName: 'Sasha',
-                status: 'Midle',
-                location: {city: 'Dnipro', country: 'Ukraine'}
-            },
-            {
-                id: v1(),
-                photoUrl: 'http://www.clker.com/cliparts/3/d/3/7/12065718151966625209johnny_automatic_NPS_map_pictographs_part_96.svg.hi.png',
-                followed: true,
-                fullName: 'Dima',
-                status: 'Senior',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: v1(),
-                photoUrl: 'http://www.clker.com/cliparts/3/d/3/7/12065718151966625209johnny_automatic_NPS_map_pictographs_part_96.svg.hi.png',
-                followed: false,
-                fullName: 'Sveta',
-                status: 'PM',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-        ]
-    )
+    axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        .then(response => {
+            props.setUsers(response.data.items)
+        })
+}
 }
     return <div>
+        <button onClick={getUsers}>GetUsers</button>
         {
             props.usersPage.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img src={u.photoUrl}/>
+                        <img  src={u.photos.small!=null?u.photos.small:userPhoto}/>
                     </div>
                     <div>
                         {u.followed?<button onClick={()=>{props.unfollow(u.id)}}>Unfollow</button>:
@@ -56,12 +30,12 @@ if (props.usersPage.users.length===0) {
                 </span>
                 <span>
                     <span>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div >{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.location.country}</div>
-                        <div >{u.location.city}</div>
+                        <div>{'u.location.country'}</div>
+                        <div >{'u.location.city'}</div>
                     </span>
                 </span>
             </div>)
